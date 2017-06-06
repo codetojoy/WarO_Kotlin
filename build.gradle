@@ -1,24 +1,25 @@
 
-// http://peidevs.github.io
-
 buildscript {
-  ext.kotlin_version = '1.1.2'
-  repositories {
+    ext.kotlin_version = '1.1.2'
+    repositories {
     mavenCentral()
-  }
-  dependencies {
+    }
+    dependencies {
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-  }
+    }
 }
 
 apply plugin: 'kotlin'
 
 repositories {
-  mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-  compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  testCompile 'junit:junit:4.12'
-  testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    compile 'com.google.guava:guava-collections:r03'
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    testCompile 'junit:junit:4.12'
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 }
