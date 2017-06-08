@@ -1,12 +1,37 @@
 
 package net.codetojoy.waro.casino
 
+import net.codetojoy.waro.domain.*
+import net.codetojoy.waro.strategy.*
+
 import kotlin.test.assertEquals
-import org.junit.Test
+import org.junit.*
 
 class DealerTestSource {
     val dealer = Dealer() 
     val numCards = 60 
+
+    val players = ArrayList<Player>() 
+        
+    @Before fun setUp() {
+        val strategy = PopCard()
+        players.add(Player("Phil H", strategy, numCards))
+        players.add(Player("Daniel N", strategy, numCards))
+        players.add(Player("Doyle B", strategy, numCards))
+    }
+
+
+    @Test fun deal() {
+        val numPlayers = 3
+        val numCardsInHand = dealer.getNumCardsInHand(numCards, numPlayers)
+
+        // test
+        val table = dealer.deal(numCards, players)
+        
+        assertEquals(numCardsInHand, table.kitty.size)
+        assertEquals(numPlayers, table.players.size)
+        for (p in players) { assertEquals(numCardsInHand, p.hand.size) }
+    }
 
     @Test fun testDealHands() {
         val numPlayers = 4
