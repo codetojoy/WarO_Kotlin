@@ -13,29 +13,21 @@ class DealerTestSource {
     val numCards = 60 
     val maxCard = numCards
 
-    val players = ArrayList<Player>() 
-        
-    @Before fun setUp() {
-        players.add(Player("Phil H", strategy, maxCard))
-        players.add(Player("Daniel N", strategy, maxCard))
-        players.add(Player("Doyle B", strategy, maxCard))
-    }
+    val p1 = Player("Phil H", strategy, maxCard)
+    val p2 = Player("Daniel N", strategy, maxCard)
+    val p3 = Player("Doyle B", strategy, maxCard)
 
+    val players = mutableListOf(p1, p2, p3)
+        
     @Test fun testFindRoundWinner() {
         val prizeCard = 30
 
-        val p1 = Player("Phil H", strategy, maxCard)
-        val p2 = Player("Daniel N", strategy, maxCard)
-        val p3 = Player("Doyle B", strategy, maxCard)
-
-        p1.hand = listOf(10,11).toMutableList()
-        p2.hand = listOf(50,51).toMutableList()
-        p3.hand = listOf(40,41).toMutableList()
-
-        val thesePlayers = listOf(p1, p2, p3)
+        p1.hand = mutableListOf(10,11) 
+        p2.hand = mutableListOf(50,51)
+        p3.hand = mutableListOf(40,41)
 
         // test
-        val winner = dealer.findRoundWinner(prizeCard, thesePlayers)
+        val winner = dealer.findRoundWinner(prizeCard, players)
 
         assertEquals(p2.name, winner.player.name)
         assertEquals(50, winner.bid.offer)
