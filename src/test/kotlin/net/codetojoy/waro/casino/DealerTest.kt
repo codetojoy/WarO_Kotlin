@@ -9,18 +9,38 @@ import org.junit.*
 
 class DealerTestSource {
     val dealer = Dealer() 
+    val strategy = PopCard()
     val numCards = 60 
+    val maxCard = numCards
 
     val players = ArrayList<Player>() 
         
     @Before fun setUp() {
-        val strategy = PopCard()
-        players.add(Player("Phil H", strategy, numCards))
-        players.add(Player("Daniel N", strategy, numCards))
-        players.add(Player("Doyle B", strategy, numCards))
+        players.add(Player("Phil H", strategy, maxCard))
+        players.add(Player("Daniel N", strategy, maxCard))
+        players.add(Player("Doyle B", strategy, maxCard))
     }
 
+    @Test fun testFindRoundWinner() {
+        val prizeCard = 30
 
+        val p1 = Player("Phil H", strategy, maxCard)
+        val p2 = Player("Daniel N", strategy, maxCard)
+        val p3 = Player("Doyle B", strategy, maxCard)
+
+        p1.hand = listOf(10,11).toMutableList()
+        p2.hand = listOf(50,51).toMutableList()
+        p3.hand = listOf(40,41).toMutableList()
+
+        val thesePlayers = listOf(p1, p2, p3)
+
+        // test
+        val winner = dealer.findRoundWinner(prizeCard, thesePlayers)
+
+        assertEquals(p2.name, winner.player.name)
+        assertEquals(50, winner.bid.offer)
+    }
+        
     @Test fun deal() {
         val numPlayers = 3
         val numCardsInHand = dealer.getNumCardsInHand(numCards, numPlayers)

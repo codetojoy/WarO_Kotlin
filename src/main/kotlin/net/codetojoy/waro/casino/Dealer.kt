@@ -7,8 +7,18 @@ import java.util.Collections
 
 import com.google.common.collect.Lists
 
+class Winner(val player: Player, val bid: Bid) {
+    companion object {
+        fun seed(): Winner {
+            val fakePlayer:Player = Player.fakePlayer()
+            val fakeBid:Bid = Bid(-1, fakePlayer)
+            return Winner(fakePlayer, fakeBid)
+        }
+    }
+}
+
 class Dealer() {
-    fun deal(numCards:Int, players:MutableList<Player>): Table {
+    fun deal(numCards: Int, players: MutableList<Player>): Table {
         val numPlayers = players.size
         
         val hands = dealHands(numCards, numPlayers)
@@ -26,7 +36,23 @@ class Dealer() {
 
     // ------ internal 
 
-    fun dealHands(numCards:Int, numPlayers:Int): List<List<Int>> {
+    fun findRoundWinner(prizeCard: Int, players: List<Player>): Winner {
+        val seed:Winner = Winner.seed()
+        
+        val result:Winner = players.fold(seed) { leader, player ->
+            val bid = player.getBid(prizeCard)
+
+            if (bid.offer > leader.bid.offer) {
+                Winner(bid.player, bid)
+            } else {
+                leader
+            }
+        }
+
+        return result
+    }
+
+    fun dealHands(numCards: Int, numPlayers: Int): List<List<Int>> {
         var result = ArrayList<List<Int>>() 
         
         val deck = newDeck(numCards)        
@@ -47,7 +73,7 @@ class Dealer() {
         return deck
     }
 
-    fun getNumCardsInHand(numCards:Int, numPlayers: Int): Int {
+    fun getNumCardsInHand(numCards: Int, numPlayers: Int): Int {
         return (numCards / (numPlayers + 1)) 
     }    
 }
