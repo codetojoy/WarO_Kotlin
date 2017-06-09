@@ -34,7 +34,26 @@ class Dealer() {
         return table
     }
 
+    fun play(table: Table) {
+        for (prizeCard in table.kitty) {
+            playRound(prizeCard, table.players)
+        }
+    }
+
     // ------ internal 
+
+    fun playRound(prizeCard: Int, players: List<Player>): Player {
+        val pair:Winner = findRoundWinner(prizeCard, players)
+        // val winningBid:Int  = pair.bid.offer
+        val winner:Player = pair.player
+
+        // if (verbose) { println "\nthis round: ${winner.name} WINS $prizeCard with ${winningBid}" }
+
+        winner.playerStats.numRoundsWon++
+        winner.playerStats.total += prizeCard
+        
+        return winner        
+    }
 
     fun findRoundWinner(prizeCard: Int, players: List<Player>): Winner {
         val seed:Winner = Winner.seed()

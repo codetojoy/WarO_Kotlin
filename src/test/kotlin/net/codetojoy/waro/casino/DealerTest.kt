@@ -18,6 +18,38 @@ class DealerTestSource {
     val p3 = Player("Doyle B", strategy, maxCard)
 
     val players = mutableListOf(p1, p2, p3)
+
+    @Test fun testPlay() {  
+        val kitty = mutableListOf(35,25,55)
+
+        p1.hand = mutableListOf(10,11,12)
+        p2.hand = mutableListOf(15,16,17)
+        p3.hand = mutableListOf(58,50,49)
+
+        val table = Table(players, kitty)
+
+        // test
+        dealer.play(table)
+
+        assertEquals(0, table.players[0].hand.size)
+        assertEquals(0, table.players[1].hand.size)
+        assertEquals(0, table.players[2].hand.size)
+    }
+
+    @Test fun testPlayRound() {
+        val prizeCard = 42
+        
+        p1.hand = mutableListOf(10,11,12)
+        p2.hand = mutableListOf(15,16,17)
+        p3.hand = mutableListOf(58,50,49)
+        
+        // test
+        val winner = dealer.playRound(prizeCard, players)
+        
+        assertEquals("Doyle B", winner.name)
+        assertEquals(1, winner.playerStats.numRoundsWon)
+        assertEquals(prizeCard, winner.playerStats.total)
+    }
         
     @Test fun testFindRoundWinner() {
         val prizeCard = 30
