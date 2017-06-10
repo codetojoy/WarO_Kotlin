@@ -7,7 +7,7 @@ class Tourney(val players: List<Player>, val numGames: Int,
               val numCards: Int, val isVerbose: Boolean) {
     
     fun playGames() {
-        for (i in 0..numGames) {
+        for (i in 1..numGames) {
             playGame(numCards)
         }
 

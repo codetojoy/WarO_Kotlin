@@ -6,10 +6,13 @@ WarO_Kotlin
 
 The War-O [code kata](https://en.wikipedia.org/wiki/Kata_(programming)) in Kotlin.
 
-To execute tests:
+To execute:
 
 * install Gradle from http://gradle.org
-* execute: `gradle test`
+* configure game, players in `src/main/kotlin/net/codetojoy/waro/App.kt`
+* execute: 
+    * `gradle myBuild`
+    * `java -jar ./staging/warO.jar`
 
 Rules:
 ---------
