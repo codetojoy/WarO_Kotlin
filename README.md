@@ -1,5 +1,5 @@
 
-### Under Construction
+### Work In Progress
 
 WarO_Kotlin
 ===========
@@ -8,10 +8,8 @@ The War-O [code kata](https://en.wikipedia.org/wiki/Kata_(programming)) in Kotli
 
 To execute tests:
 
--- install Gradle from http://gradle.org
--- type (or script): 
-
-gradle test
+* install Gradle from http://gradle.org
+* execute: `gradle test`
 
 Rules:
 ---------
