@@ -17,8 +17,7 @@ class Winner(val player: Player, val bid: Bid) {
     }
 }
 
-class Dealer() {
-    // fun deal(numCards: Int, players: MutableList<Player>): Table {
+class Dealer(val isVerbose: Boolean) {
     fun deal(numCards: Int, players: List<Player>): Table {
         val numPlayers = players.size
         
@@ -45,10 +44,10 @@ class Dealer() {
 
     fun playRound(prizeCard: Int, players: List<Player>): Player {
         val pair:Winner = findRoundWinner(prizeCard, players)
-        // val winningBid:Int  = pair.bid.offer
         val winner:Player = pair.player
+        val winningBid:Int = pair.bid.offer
 
-        // if (verbose) { println "\nthis round: ${winner.name} WINS $prizeCard with ${winningBid}" }
+        if (isVerbose) { println("\nthis round: ${winner.name} WINS $prizeCard with ${winningBid}") }
 
         winner.playerStats.numRoundsWon++
         winner.playerStats.total += prizeCard

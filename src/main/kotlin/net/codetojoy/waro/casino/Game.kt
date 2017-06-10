@@ -3,8 +3,8 @@ package net.codetojoy.waro.casino
 
 import net.codetojoy.waro.domain.*
 
-class Game(var verbose: Boolean) {
-    val dealer = Dealer()
+class Game(var isVerbose: Boolean) {
+    val dealer = Dealer(isVerbose)
 
     fun playGame(numCards: Int, players: List<Player>): Player {
         val table = dealer.deal(numCards, players)
@@ -14,7 +14,7 @@ class Game(var verbose: Boolean) {
 
     fun playGame(table: Table): Player {
          
-        if (verbose) {
+        if (isVerbose) {
             println("kitty: ${table.kitty.toString()}")
             for (p in table.players) {
                 println("${p.name}: ${p.hand.toString()}")
@@ -36,7 +36,7 @@ class Game(var verbose: Boolean) {
         val tmpWinner:Player? = players.maxBy { p -> p.playerStats.total }
         val winner:Player = tmpWinner!!
         
-        if (verbose) {
+        if (isVerbose) {
             for (p in players) {
                 val stats = p.playerStats
                 println("${p.name} won ${stats.numRoundsWon} rounds with ${stats.total}")
