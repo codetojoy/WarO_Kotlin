@@ -1,6 +1,4 @@
 
-### Work In Progress
-
 WarO_Kotlin
 ===========
 
