@@ -10,13 +10,10 @@ buildscript {
 }
 
 apply plugin: 'kotlin'
+apply plugin: 'application'
 
 repositories {
     jcenter()
-}
-
-configurations {
-    releaseJars
 }
 
 dependencies {
@@ -25,45 +22,8 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
     testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
-
-    releaseJars 'com.google.guava:guava-collections:r03'
-    releaseJars "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 
-def stagingDir = "staging"
+mainClassName = 'net.codetojoy.waro.AppKt'
 
-task init {
-    doLast {
-        delete "${buildDir}/jars"
-        mkdir "${buildDir}/jars"
-        delete stagingDir
-        mkdir stagingDir
-    }
-}
-
-task copyReleaseJars(type: Copy, dependsOn: 'init') {
-    into "${buildDir}/jars"
-    from configurations.releaseJars
-}
-
-def classpath = new StringBuilder()
-classpath.append("jars/guava-collections-r03.jar ")
-classpath.append("jars/guava-base-r03.jar ")
-classpath.append("jars/kotlin-stdlib-1.1.2.jar")
-
-jar.archiveName 'warO.jar'
-jar.manifest {
-    attributes 'Main-Class' : 'net.codetojoy.waro.AppKt' 
-    attributes 'Class-Path' : classpath
-}
-
-task myBuild(dependsOn: ['test', 'copyReleaseJars', 'jar']) {
-    doLast {
-        ant.zip(destfile: "${buildDir}/warO.zip") {
-            zipfileset(dir: "${buildDir}/jars", prefix: "jars")
-            zipfileset(file: "${buildDir}/libs/warO.jar")
-        }
-
-        ant.unzip(src: "${buildDir}/warO.zip", dest: stagingDir)
-    }
-}
+defaultTasks 'run'

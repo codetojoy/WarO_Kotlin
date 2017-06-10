@@ -9,8 +9,7 @@ To execute:
 * install Gradle from http://gradle.org
 * configure game, players in `src/main/kotlin/net/codetojoy/waro/App.kt`
 * execute: 
-    * `gradle myBuild`
-    * `java -jar ./staging/warO.jar`
+    * `gradle run`
 
 Rules:
 ---------
