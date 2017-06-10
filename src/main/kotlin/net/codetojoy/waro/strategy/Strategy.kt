@@ -2,5 +2,5 @@
 package net.codetojoy.waro.strategy
 
 interface Strategy {
-    fun selectCard(prizeCard: Int, hand: List<Int>, maxCard:Int): Int
+    fun selectCard(prizeCard: Int, hand: List<Int>, maxCard: Int): Int
 }
