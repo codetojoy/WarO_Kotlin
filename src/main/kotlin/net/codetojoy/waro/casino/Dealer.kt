@@ -18,7 +18,8 @@ class Winner(val player: Player, val bid: Bid) {
 }
 
 class Dealer() {
-    fun deal(numCards: Int, players: MutableList<Player>): Table {
+    // fun deal(numCards: Int, players: MutableList<Player>): Table {
+    fun deal(numCards: Int, players: List<Player>): Table {
         val numPlayers = players.size
         
         val hands = dealHands(numCards, numPlayers)
