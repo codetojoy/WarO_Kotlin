@@ -3,7 +3,7 @@ package net.codetojoy.waro.domain
 
 import net.codetojoy.waro.strategy.*
 
-class Player(val name: String, val strategy: Strategy, val maxCard:Int) {
+class Player(val name: String, val strategy: Strategy, val maxCard: Int) {
     val playerStats: PlayerStats
     var hand: MutableList<Int>
 

@@ -1,9 +1,9 @@
 package net.codetojoy.waro.domain
 
 class PlayerStats() {
-    var total:Int
+    var total: Int
     var numGamesWon: Int
-    var numRoundsWon:Int
+    var numRoundsWon: Int
 
     init {
         total = 0
