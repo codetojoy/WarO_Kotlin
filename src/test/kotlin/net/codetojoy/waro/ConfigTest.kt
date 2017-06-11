@@ -10,6 +10,20 @@ import org.junit.Test
 class ConfigTestSource {
     val config: Config = Config() 
 
+    @Test fun testBuildStrategy_MaxCard() {
+        // test
+        val result = config.buildStrategy("maxCard")
+        
+        assertTrue(result is MaxCard)
+    }
+
+    @Test fun testBuildStrategy_Console() {
+        // test
+        val result = config.buildStrategy("console")
+        
+        assertTrue(result is net.codetojoy.waro.strategy.Console)
+    }
+
     @Test fun testBuild_NoPlayers() {
         val jsonInput = "{ \"numGames\": 2, \"numCards\": 60, \"players\": [] }"
         

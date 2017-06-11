@@ -23,9 +23,18 @@ class Config {
         players = mutableListOf() 
     }
 
-    fun buildPlayer(name: String, strategyStr: String, maxCard: Int): Player {
-        var thisStrategy: Strategy? 
+    fun buildStrategy(strategyStr: String) = when(strategyStr.toUpperCase()) {
+        CONSOLE -> net.codetojoy.waro.strategy.Console()
+        MAX_CARD -> MaxCard()
+        MIN_CARD -> MinCard()
+        POP_CARD -> PopCard()
+        else -> throw IllegalStateException("unknown strategy: " + strategyStr)
+    }
 
+    fun buildPlayer(name: String, strategyStr: String, maxCard: Int): Player {
+        val thisStrategy = buildStrategy(strategyStr) 
+
+        /*
         val upperStrategyStr: String = strategyStr.toUpperCase()
 
         if (upperStrategyStr == MAX_CARD) {
@@ -39,6 +48,7 @@ class Config {
         } else {
             throw IllegalStateException("unknown strategy: " + strategyStr)
         }
+        */
 
         return Player(name, thisStrategy, maxCard)
     }

@@ -92,7 +92,5 @@ class Dealer(val isVerbose: Boolean) {
         return deck
     }
 
-    fun getNumCardsInHand(numCards: Int, numPlayers: Int): Int {
-        return (numCards / (numPlayers + 1)) 
-    }    
+    fun getNumCardsInHand(numCards: Int, numPlayers: Int) = numCards / (numPlayers + 1)
 }
