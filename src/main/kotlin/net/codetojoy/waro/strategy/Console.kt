@@ -1,7 +1,7 @@
 
 package net.codetojoy.waro.strategy
 
-import net.codetojoy.waro.Log
+import net.codetojoy.waro.log
 
 import java.util.*
 
@@ -10,15 +10,14 @@ class Console : Strategy {
     override fun selectCard(prizeCard: Int, hand: List<Int>, maxCard: Int): Int {
         var bid: Int? = null
 
-        Log.log("\nCard in play is $prizeCard")
-        Log.log("\nYour hand is $hand")
-        Log.log("")
+        "\nCard in play is $prizeCard".log()
+        "\nYour hand is $hand\n".log()
 
         var ok: Boolean = false
         val scanner: Scanner = Scanner(System.`in`)
 
         while (!ok) {
-            Log.log("Enter your bid: ")
+            "Enter your bid: ".log()
             bid = scanner.nextInt()
 
             if (hand.contains(bid)) {

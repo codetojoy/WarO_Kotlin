@@ -3,7 +3,6 @@ package net.codetojoy.waro.casino
 
 import net.codetojoy.waro.domain.*
 import net.codetojoy.waro.strategy.*
-import net.codetojoy.waro.Log
 
 import kotlin.test.assertEquals
 import org.junit.*
@@ -19,10 +18,6 @@ class GameTestSource {
     val p3 = Player("Doyle B", strategy, maxCard)
 
     val players = mutableListOf(p1, p2, p3)
-
-    init {
-        Log.setTestMode()
-    }
 
     @Test fun testPlayGame() {
         val kitty = mutableListOf(4,6,8)

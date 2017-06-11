@@ -2,7 +2,7 @@
 package net.codetojoy.waro.casino
 
 import net.codetojoy.waro.domain.*
-import net.codetojoy.waro.Log
+import net.codetojoy.waro.log
 
 class Tourney(val players: List<Player>, val numGames: Int,
               val numCards: Int, val isVerbose: Boolean) {
@@ -12,10 +12,10 @@ class Tourney(val players: List<Player>, val numGames: Int,
             playGame(numCards)
         }
 
-        Log.log("\nTourney summary:  ")
+        "\nTourney summary:  ".log()
 
         players.forEach { p ->
-            Log.log("${p.name} has ${p.playerStats.numGamesWon} wins over ${numGames} games")
+            "${p.name} has ${p.playerStats.numGamesWon} wins over ${numGames} games".log()
         }
     }
 

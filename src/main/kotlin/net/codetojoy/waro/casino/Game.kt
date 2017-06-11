@@ -2,7 +2,7 @@
 package net.codetojoy.waro.casino
 
 import net.codetojoy.waro.domain.*
-import net.codetojoy.waro.Log
+import net.codetojoy.waro.log
 
 class Game(var isVerbose: Boolean) {
     val dealer = Dealer(isVerbose)
@@ -16,9 +16,9 @@ class Game(var isVerbose: Boolean) {
     fun playGame(table: Table): Player {
 
         if (isVerbose) {
-            Log.log("kitty: ${table.kitty.toString()}")
-            for (p in table.players) {
-                Log.log("${p.name}: ${p.hand.toString()}")
+            "kitty: ${table.kitty.toString()}".log()
+            table.players.forEach { p ->
+                "${p.name}: ${p.hand.toString()}".log()
             }
         }
 
@@ -40,13 +40,13 @@ class Game(var isVerbose: Boolean) {
         if (isVerbose) {
             players.forEach { p -> 
                 val stats = p.playerStats
-                Log.log("${p.name} won ${stats.numRoundsWon} rounds with ${stats.total}")
+                "${p.name} won ${stats.numRoundsWon} rounds with ${stats.total}".log()
             }
         }
 
         winner.playerStats.numGamesWon++
-        Log.log("\nGame summary:")
-        Log.log("overall WINNER is: ${winner.name}")
+        "\nGame summary:".log()
+        "overall WINNER is: ${winner.name}".log()
 
         return winner
     }
