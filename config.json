@@ -1,0 +1,9 @@
+{
+    "numCards": 60,
+    "numGames": 2,
+    "players": [
+        {"name": "Beethoven", "strategy": "minCard"},
+        {"name": "Chopin", "strategy": "popCard"},
+        {"name": "Mozart", "strategy": "maxCard"}
+    ]
+}
