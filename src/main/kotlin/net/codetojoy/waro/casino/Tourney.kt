@@ -14,7 +14,7 @@ class Tourney(val players: List<Player>, val numGames: Int,
 
         Log.log("\nTourney summary:  ")
 
-        for (p in players) {
+        players.forEach { p ->
             Log.log("${p.name} has ${p.playerStats.numGamesWon} wins over ${numGames} games")
         }
     }
@@ -26,6 +26,6 @@ class Tourney(val players: List<Player>, val numGames: Int,
 
         game.playGame(numCards, players)
 
-        for (p in players) { p.clear() }
+        players.forEach { it.clear() }
     }
 }

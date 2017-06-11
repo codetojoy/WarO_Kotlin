@@ -25,11 +25,8 @@ class Dealer(val isVerbose: Boolean) {
         return table
     }
 
-    fun play(table: Table) {
-        for (prizeCard in table.kitty) {
-            playRound(prizeCard, table.players)
-        }
-    }
+    fun play(table: Table) =
+        table.kitty.forEach { playRound(it, table.players) }
 
     // ------ internal
 
@@ -69,9 +66,7 @@ class Dealer(val isVerbose: Boolean) {
         val deck = newDeck(numCards)
         val numCardsInHand = getNumCardsInHand(numCards, numPlayers)
 
-        val hands = Lists.partition(deck, numCardsInHand)
-
-        for (hand in hands) {
+        Lists.partition(deck, numCardsInHand).forEach { hand ->
             result.add(hand)
         }
 

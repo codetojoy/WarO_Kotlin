@@ -27,7 +27,7 @@ class Game(var isVerbose: Boolean) {
         return determineWinner(table)
     }
 
-    // ---- internal 
+    // ---- internal
 
     fun determineWinner(table: Table): Player {
         val players = table.players
@@ -38,7 +38,7 @@ class Game(var isVerbose: Boolean) {
         val winner:Player = tmpWinner!!
 
         if (isVerbose) {
-            for (p in players) {
+            players.forEach { p -> 
                 val stats = p.playerStats
                 Log.log("${p.name} won ${stats.numRoundsWon} rounds with ${stats.total}")
             }
