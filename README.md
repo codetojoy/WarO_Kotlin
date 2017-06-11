@@ -7,9 +7,10 @@ The War-O [code kata](https://en.wikipedia.org/wiki/Kata_(programming)) in Kotli
 To execute:
 
 * install Gradle from http://gradle.org
-* configure game, players in `src/main/kotlin/net/codetojoy/waro/App.kt`
+* configure game, players in `config.json`
 * execute: 
-    * `gradle run`
+    * `gradle installDist`
+    * `./install/bin/WarO_Kotlin config.json`
 
 Rules:
 ---------

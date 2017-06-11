@@ -2,10 +2,10 @@
 buildscript {
     ext.kotlin_version = '1.1.2'
     repositories {
-    mavenCentral()
+        mavenCentral()
     }
     dependencies {
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -18,12 +18,27 @@ repositories {
 
 dependencies {
     compile 'com.google.guava:guava-collections:r03'
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile 'com.beust:klaxon:0.30'
 
     testCompile 'junit:junit:4.12'
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 }
 
 mainClassName = 'net.codetojoy.waro.AppKt'
 
-defaultTasks 'run'
+run {
+    args "config.json"
+}
+
+project.ext.stagingDir = "install"
+
+installDist.doFirst {
+    ant.delete(dir: project.ext.stagingDir)
+}
+
+installDist {
+    into project.ext.stagingDir
+}
+

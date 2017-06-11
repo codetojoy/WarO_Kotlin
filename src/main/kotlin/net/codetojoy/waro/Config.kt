@@ -12,6 +12,7 @@ class Config {
     var numCards: Int
     var players: MutableList<Player>
 
+    val CONSOLE: String = "CONSOLE";
     val MAX_CARD: String = "MAXCARD";
     val MIN_CARD: String = "MINCARD";
     val POP_CARD: String = "POPCARD";
@@ -31,6 +32,8 @@ class Config {
             thisStrategy = MaxCard()
         } else if (upperStrategyStr == MIN_CARD) {
             thisStrategy = MinCard()
+        } else if (upperStrategyStr == CONSOLE) {
+            thisStrategy = net.codetojoy.waro.strategy.Console()
         } else if (upperStrategyStr == POP_CARD) {
             thisStrategy = PopCard()
         } else {
