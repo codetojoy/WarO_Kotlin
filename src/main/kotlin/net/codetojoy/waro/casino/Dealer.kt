@@ -34,8 +34,6 @@ class Dealer(val isVerbose: Boolean) {
 
     fun playRound(prizeCard: Int, players: List<Player>): Player {
         val (winner, winningBid) = findRoundWinner(prizeCard, players)
-        // val winner:Player = pair.player
-        // val winningBid:Int = pair.bid.offer
 
         if (isVerbose) { println("\nthis round: ${winner.name} WINS $prizeCard with ${winningBid}") }
 
