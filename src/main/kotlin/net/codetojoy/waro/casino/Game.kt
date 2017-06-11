@@ -2,6 +2,7 @@
 package net.codetojoy.waro.casino
 
 import net.codetojoy.waro.domain.*
+import net.codetojoy.waro.Log
 
 class Game(var isVerbose: Boolean) {
     val dealer = Dealer(isVerbose)
@@ -13,39 +14,39 @@ class Game(var isVerbose: Boolean) {
     }
 
     fun playGame(table: Table): Player {
-         
+
         if (isVerbose) {
-            println("kitty: ${table.kitty.toString()}")
+            Log.log("kitty: ${table.kitty.toString()}")
             for (p in table.players) {
-                println("${p.name}: ${p.hand.toString()}")
+                Log.log("${p.name}: ${p.hand.toString()}")
             }
         }
-    
+
         dealer.play(table)
 
         return determineWinner(table)
     }
-        
+
     // ---- internal 
 
     fun determineWinner(table: Table): Player {
         val players = table.players
-        
+
         table.assertTotals()
-        
+
         val tmpWinner:Player? = players.maxBy { p -> p.playerStats.total }
         val winner:Player = tmpWinner!!
-        
+
         if (isVerbose) {
             for (p in players) {
                 val stats = p.playerStats
-                println("${p.name} won ${stats.numRoundsWon} rounds with ${stats.total}")
+                Log.log("${p.name} won ${stats.numRoundsWon} rounds with ${stats.total}")
             }
         }
-        
+
         winner.playerStats.numGamesWon++
-        println("\nGame summary:")
-        println("overall WINNER is: ${winner.name}")
+        Log.log("\nGame summary:")
+        Log.log("overall WINNER is: ${winner.name}")
 
         return winner
     }

@@ -2,29 +2,30 @@
 package net.codetojoy.waro.casino
 
 import net.codetojoy.waro.domain.*
+import net.codetojoy.waro.Log
 
-class Tourney(val players: List<Player>, val numGames: Int, 
+class Tourney(val players: List<Player>, val numGames: Int,
               val numCards: Int, val isVerbose: Boolean) {
-    
+
     fun playGames() {
         for (i in 1..numGames) {
             playGame(numCards)
         }
 
-        println("\nTourney summary:  ")
+        Log.log("\nTourney summary:  ")
 
         for (p in players) {
-            println("${p.name} has ${p.playerStats.numGamesWon} wins over ${numGames} games")
-        }        
+            Log.log("${p.name} has ${p.playerStats.numGamesWon} wins over ${numGames} games")
+        }
     }
-    
-    // ------- internal 
-    
+
+    // ------- internal
+
     fun playGame(numCards: Int) {
         val game = Game(isVerbose)
 
-        game.playGame(numCards, players)    
+        game.playGame(numCards, players)
 
-        for (p in players) { p.clear() }        
+        for (p in players) { p.clear() }
     }
 }
