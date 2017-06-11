@@ -7,30 +7,20 @@ import java.util.Collections
 
 import com.google.common.collect.Lists
 
-class Winner(val player: Player, val bid: Bid) {
-    companion object {
-        fun seed(): Winner {
-            val fakePlayer:Player = Player.fakePlayer()
-            val fakeBid:Bid = Bid(-1, fakePlayer)
-            return Winner(fakePlayer, fakeBid)
-        }
-    }
-}
-
 class Dealer(val isVerbose: Boolean) {
     fun deal(numCards: Int, players: List<Player>): Table {
         val numPlayers = players.size
-        
+
         val hands = dealHands(numCards, numPlayers)
 
         val kitty = hands[0]
-        
+
         for (index in 1..numPlayers) {
             players[index - 1].hand = hands[index].toMutableList()
         }
-        
+
         val table = Table(players, kitty)
-        
+
         return table
     }
 
@@ -40,29 +30,32 @@ class Dealer(val isVerbose: Boolean) {
         }
     }
 
-    // ------ internal 
+    // ------ internal
 
     fun playRound(prizeCard: Int, players: List<Player>): Player {
-        val pair:Winner = findRoundWinner(prizeCard, players)
-        val winner:Player = pair.player
-        val winningBid:Int = pair.bid.offer
+        val (winner, winningBid) = findRoundWinner(prizeCard, players)
+        // val winner:Player = pair.player
+        // val winningBid:Int = pair.bid.offer
 
         if (isVerbose) { println("\nthis round: ${winner.name} WINS $prizeCard with ${winningBid}") }
 
         winner.playerStats.numRoundsWon++
         winner.playerStats.total += prizeCard
-        
-        return winner        
+
+        return winner
     }
 
-    fun findRoundWinner(prizeCard: Int, players: List<Player>): Winner {
-        val seed:Winner = Winner.seed()
-        
-        val result:Winner = players.fold(seed) { leader, player ->
+    fun findRoundWinner(prizeCard: Int, players: List<Player>): Pair<Player, Bid> {
+        val fakePlayer = Player.fakePlayer()
+        val fakeBid = Bid(-1, fakePlayer)
+        val seed = Pair(fakePlayer, fakeBid)
+
+        val result: Pair<Player,Bid> = players.fold(seed) { leader, player ->
+            val (_, highBid: Bid) = leader
             val bid = player.getBid(prizeCard)
 
-            if (bid.offer > leader.bid.offer) {
-                Winner(bid.player, bid)
+            if (bid.offer > highBid.offer) {
+                Pair(bid.player, bid)
             } else {
                 leader
             }
@@ -72,9 +65,9 @@ class Dealer(val isVerbose: Boolean) {
     }
 
     fun dealHands(numCards: Int, numPlayers: Int): List<List<Int>> {
-        var result = ArrayList<List<Int>>() 
-        
-        val deck = newDeck(numCards)        
+        var result = ArrayList<List<Int>>()
+
+        val deck = newDeck(numCards)
         val numCardsInHand = getNumCardsInHand(numCards, numPlayers)
 
         val hands = Lists.partition(deck, numCardsInHand)

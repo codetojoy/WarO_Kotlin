@@ -9,9 +9,9 @@ import org.junit.*
 
 class DealerTestSource {
     val isVerbose = false
-    val dealer = Dealer(isVerbose) 
+    val dealer = Dealer(isVerbose)
     val strategy = PopCard()
-    val numCards = 60 
+    val numCards = 60
     val maxCard = numCards
 
     val p1 = Player("Phil H", strategy, maxCard)
@@ -20,7 +20,7 @@ class DealerTestSource {
 
     val players = mutableListOf(p1, p2, p3)
 
-    @Test fun testPlay() {  
+    @Test fun testPlay() {
         val kitty = mutableListOf(35,25,55)
 
         p1.hand = mutableListOf(10,11,12)
@@ -39,40 +39,40 @@ class DealerTestSource {
 
     @Test fun testPlayRound() {
         val prizeCard = 42
-        
+
         p1.hand = mutableListOf(10,11,12)
         p2.hand = mutableListOf(15,16,17)
         p3.hand = mutableListOf(58,50,49)
-        
+
         // test
         val winner = dealer.playRound(prizeCard, players)
-        
+
         assertEquals("Doyle B", winner.name)
         assertEquals(1, winner.playerStats.numRoundsWon)
         assertEquals(prizeCard, winner.playerStats.total)
     }
-        
+
     @Test fun testFindRoundWinner() {
         val prizeCard = 30
 
-        p1.hand = mutableListOf(10,11) 
+        p1.hand = mutableListOf(10,11)
         p2.hand = mutableListOf(50,51)
         p3.hand = mutableListOf(40,41)
 
         // test
-        val winner = dealer.findRoundWinner(prizeCard, players)
+        val (winner, winningBid) = dealer.findRoundWinner(prizeCard, players)
 
-        assertEquals(p2.name, winner.player.name)
-        assertEquals(50, winner.bid.offer)
+        assertEquals(p2.name, winner.name)
+        assertEquals(50, winningBid.offer)
     }
-        
+
     @Test fun deal() {
         val numPlayers = 3
         val numCardsInHand = dealer.getNumCardsInHand(numCards, numPlayers)
 
         // test
         val table = dealer.deal(numCards, players)
-        
+
         assertEquals(numCardsInHand, table.kitty.size)
         assertEquals(numPlayers, table.players.size)
         for (p in players) { assertEquals(numCardsInHand, p.hand.size) }
@@ -83,7 +83,7 @@ class DealerTestSource {
 
         // test
         val hands = dealer.dealHands(numCards, numPlayers)
-        
+
         assertEquals(5, hands.size)
 
         var uniques = HashSet<Int>()
@@ -97,22 +97,22 @@ class DealerTestSource {
 
     @Test fun testGetNumCardsInHand_Even() {
         val numPlayers = 4
-        
+
         // test
         val result = dealer.getNumCardsInHand(numCards, numPlayers)
-        
+
         assertEquals(12, result)
-    }    
+    }
 
     @Test fun testGetNumCardsInHand_Odd() {
-        val thisNumCards = 30 
+        val thisNumCards = 30
         val numPlayers = 3
-        
+
         // test
         val result = dealer.getNumCardsInHand(thisNumCards, numPlayers)
-        
+
         assertEquals(7, result)
-    }    
+    }
 
     @Test fun testNewDeckSize() {
         // test
@@ -122,7 +122,7 @@ class DealerTestSource {
     }
 
     @Test fun testNewDeckComplete() {
-        // test 
+        // test
         val deck = dealer.newDeck(numCards)
 
         var uniques = HashSet<Int>()
