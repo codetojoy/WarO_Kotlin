@@ -8,6 +8,7 @@ import net.codetojoy.waro.strategy.*
 fun main(args: Array<String>) {
     val configJson = args[0]
     val config = Config().buildFromFile(configJson)
+    Config.logDelay = true
 
     val numCards = config.numCards
     val numGames = config.numGames

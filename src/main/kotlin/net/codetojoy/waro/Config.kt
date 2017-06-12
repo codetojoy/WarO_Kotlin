@@ -23,6 +23,10 @@ class Config {
         players = mutableListOf() 
     }
 
+    companion object {
+        var logDelay = false
+    }
+
     fun buildStrategy(strategyStr: String) = when(strategyStr.toUpperCase()) {
         CONSOLE -> net.codetojoy.waro.strategy.Console()
         MAX_CARD -> MaxCard()
