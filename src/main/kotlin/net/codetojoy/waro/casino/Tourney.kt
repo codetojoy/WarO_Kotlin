@@ -21,7 +21,7 @@ class Tourney(val players: List<Player>, val numGames: Int,
 
     // ------- internal
 
-    fun playGame(numCards: Int) {
+    internal fun playGame(numCards: Int) {
         val game = Game(isVerbose)
 
         game.playGame(numCards, players)

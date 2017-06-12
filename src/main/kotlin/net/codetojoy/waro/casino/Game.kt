@@ -29,7 +29,7 @@ class Game(var isVerbose: Boolean) {
 
     // ---- internal
 
-    fun determineWinner(table: Table): Player {
+    internal fun determineWinner(table: Table): Player {
         val players = table.players
 
         table.assertTotals()

@@ -30,7 +30,7 @@ class Dealer(val isVerbose: Boolean) {
 
     // ------ internal
 
-    fun playRound(prizeCard: Int, players: List<Player>): Player {
+    internal fun playRound(prizeCard: Int, players: List<Player>): Player {
         val (winner, winningBid) = findRoundWinner(prizeCard, players)
 
         "\nthis round: ${winner.name} WINS ${prizeCard} with ${winningBid.offer}".log(isVerbose)
@@ -41,7 +41,7 @@ class Dealer(val isVerbose: Boolean) {
         return winner
     }
 
-    fun findRoundWinner(prizeCard: Int, players: List<Player>): Pair<Player, Bid> {
+    internal fun findRoundWinner(prizeCard: Int, players: List<Player>): Pair<Player, Bid> {
         val fakePlayer = Player.fakePlayer()
         val fakeBid = Bid(-1, fakePlayer)
         val seed = Pair(fakePlayer, fakeBid)
@@ -60,7 +60,7 @@ class Dealer(val isVerbose: Boolean) {
         return result
     }
 
-    fun dealHands(numCards: Int, numPlayers: Int): List<List<Int>> {
+    internal fun dealHands(numCards: Int, numPlayers: Int): List<List<Int>> {
         var result = ArrayList<List<Int>>()
 
         val deck = newDeck(numCards)
@@ -73,11 +73,11 @@ class Dealer(val isVerbose: Boolean) {
         return result
     }
 
-    fun newDeck(numCards: Int): MutableList<Int> {
+    internal fun newDeck(numCards: Int): MutableList<Int> {
         val deck = MutableList(numCards, { it + 1 })
         Collections.shuffle(deck)
         return deck
     }
 
-    fun getNumCardsInHand(numCards: Int, numPlayers: Int) = numCards / (numPlayers + 1)
+    internal fun getNumCardsInHand(numCards: Int, numPlayers: Int) = numCards / (numPlayers + 1)
 }
