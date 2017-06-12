@@ -13,8 +13,8 @@ class Console : Strategy {
         "\nCard in play is $prizeCard".log()
         "\nYour hand is $hand\n".log()
 
-        var ok: Boolean = false
-        val scanner: Scanner = Scanner(System.`in`)
+        var ok = false
+        val scanner = Scanner(System.`in`)
 
         while (!ok) {
             "Enter your bid: ".log()
