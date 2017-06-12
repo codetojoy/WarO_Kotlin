@@ -38,22 +38,6 @@ class Config {
     fun buildPlayer(name: String, strategyStr: String, maxCard: Int): Player {
         val thisStrategy = buildStrategy(strategyStr) 
 
-        /*
-        val upperStrategyStr: String = strategyStr.toUpperCase()
-
-        if (upperStrategyStr == MAX_CARD) {
-            thisStrategy = MaxCard()
-        } else if (upperStrategyStr == MIN_CARD) {
-            thisStrategy = MinCard()
-        } else if (upperStrategyStr == CONSOLE) {
-            thisStrategy = net.codetojoy.waro.strategy.Console()
-        } else if (upperStrategyStr == POP_CARD) {
-            thisStrategy = PopCard()
-        } else {
-            throw IllegalStateException("unknown strategy: " + strategyStr)
-        }
-        */
-
         return Player(name, thisStrategy, maxCard)
     }
 
@@ -88,8 +72,7 @@ class Config {
             config.numCards = json.int("numCards")!!
             config.players = buildPlayers(playerArray, config.numCards)
         } catch (e: Exception) {
-            throw e
-            // throw IllegalArgumentException("illegal json config")
+            throw IllegalArgumentException("illegal json config")
         }
         
         return config
