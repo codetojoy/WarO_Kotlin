@@ -4,7 +4,9 @@ package net.codetojoy.waro.casino
 import net.codetojoy.waro.domain.*
 import net.codetojoy.waro.*
 
-class Tourney(val players: List<Player>, val numGames: Int, val numCards: Int) {
+class Tourney(internal val players: List<Player>, 
+              internal val numGames: Int, 
+              internal val numCards: Int) {
 
     fun playGames() {
         for (i in 1..numGames) {

@@ -5,7 +5,7 @@ import net.codetojoy.waro.domain.*
 import net.codetojoy.waro.*
 
 class Game() {
-    val dealer = Dealer()
+    private val dealer = Dealer()
 
     fun playGame(numCards: Int, players: List<Player>): Player {
         val table = dealer.deal(numCards, players)
