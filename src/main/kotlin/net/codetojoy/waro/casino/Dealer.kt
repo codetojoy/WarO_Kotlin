@@ -3,6 +3,7 @@ package net.codetojoy.waro.casino
 
 import net.codetojoy.waro.domain.*
 import net.codetojoy.waro.log
+import net.codetojoy.waro.logBanner
 
 import java.util.Collections
 
@@ -33,7 +34,9 @@ class Dealer(val isVerbose: Boolean) {
     internal fun playRound(prizeCard: Int, players: List<Player>): Player {
         val (winner, winningBid) = findRoundWinner(prizeCard, players)
 
-        "\nthis round: ${winner.name} WINS ${prizeCard} with ${winningBid.offer}".log(isVerbose)
+        "".logBanner(isVerbose)
+        "Round Summary:".log(isVerbose)
+        "${winner.name} wins ${prizeCard} with ${winningBid.offer}".log(isVerbose)
 
         winner.playerStats.numRoundsWon++
         winner.playerStats.total += prizeCard

@@ -10,3 +10,8 @@ fun String.log(isVerbose:Boolean = true) {
         System.out.println(this)
     }
 }
+
+fun String.logBanner(isVerbose:Boolean = true) {
+    "---------------------".log(isVerbose)
+}
+

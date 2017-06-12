@@ -3,6 +3,7 @@ package net.codetojoy.waro.casino
 
 import net.codetojoy.waro.domain.*
 import net.codetojoy.waro.log
+import net.codetojoy.waro.logBanner
 
 class Game(var isVerbose: Boolean) {
     val dealer = Dealer(isVerbose)
@@ -45,7 +46,9 @@ class Game(var isVerbose: Boolean) {
         }
 
         winner.playerStats.numGamesWon++
-        "\nGame summary:".log()
+
+        "".logBanner()
+        "Game summary:".log()
         "overall WINNER is: ${winner.name}".log()
 
         return winner
