@@ -9,7 +9,7 @@ import java.util.Collections
 
 import com.google.common.collect.Lists
 
-class Dealer(val isVerbose: Boolean) {
+class Dealer() {
     fun deal(numCards: Int, players: List<Player>): Table {
         val numPlayers = players.size
 
@@ -34,9 +34,9 @@ class Dealer(val isVerbose: Boolean) {
     internal fun playRound(prizeCard: Int, players: List<Player>): Player {
         val (winner, winningBid) = findRoundWinner(prizeCard, players)
 
-        "".logBanner(isVerbose)
-        "Round Summary:".log(isVerbose)
-        "${winner.name} wins ${prizeCard} with ${winningBid.offer}".log(isVerbose)
+        "".logBanner()
+        "Round Summary:".log()
+        "${winner.name} wins ${prizeCard} with ${winningBid.offer}".log()
 
         winner.playerStats.numRoundsWon++
         winner.playerStats.total += prizeCard

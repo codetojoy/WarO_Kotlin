@@ -7,10 +7,13 @@ import net.codetojoy.waro.strategy.*
 import com.beust.klaxon.*
 import java.io.*
 
-class Config {
-    var numGames: Int
-    var numCards: Int
+object Config {
+    var numGames = 0 
+    var numCards = 0 
     var players: MutableList<Player>
+
+    var logDelay = false
+    var isVerbose = false 
 
     val CONSOLE: String = "CONSOLE";
     val MAX_CARD: String = "MAXCARD";
@@ -18,13 +21,7 @@ class Config {
     val POP_CARD: String = "POPCARD";
    
     init {
-        numGames = 0
-        numCards = 0
         players = mutableListOf() 
-    }
-
-    companion object {
-        var logDelay = false
     }
 
     fun buildStrategy(strategyStr: String) = when(strategyStr.toUpperCase()) {
@@ -54,27 +51,23 @@ class Config {
         return players
     }
 
-    fun buildFromFile(jsonFile: String): Config {
+    fun buildFromFile(jsonFile: String) {
         val jsonStr = File(jsonFile).readText()
-        return buildFromString(jsonStr)
+        buildFromString(jsonStr)
     }
 
-    fun buildFromString(jsonStr: String): Config {
-        val config = Config()
-
+    fun buildFromString(jsonStr: String) {
         try {
             val parser: Parser = Parser()
             val s: StringBuilder = StringBuilder(jsonStr)
             val json: JsonObject = parser.parse(s) as JsonObject
             var playerArray: JsonArray<JsonObject> = json.array("players")!!
 
-            config.numGames = json.int("numGames")!!
-            config.numCards = json.int("numCards")!!
-            config.players = buildPlayers(playerArray, config.numCards)
+            this.numGames = json.int("numGames")!!
+            this.numCards = json.int("numCards")!!
+            this.players = buildPlayers(playerArray, this.numCards)
         } catch (e: Exception) {
             throw IllegalArgumentException("illegal json config")
         }
-        
-        return config
     }
 }

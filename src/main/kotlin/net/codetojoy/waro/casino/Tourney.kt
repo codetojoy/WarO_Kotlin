@@ -2,11 +2,9 @@
 package net.codetojoy.waro.casino
 
 import net.codetojoy.waro.domain.*
-import net.codetojoy.waro.log
-import net.codetojoy.waro.logBanner
+import net.codetojoy.waro.*
 
-class Tourney(val players: List<Player>, val numGames: Int,
-              val numCards: Int, val isVerbose: Boolean) {
+class Tourney(val players: List<Player>, val numGames: Int, val numCards: Int) {
 
     fun playGames() {
         for (i in 1..numGames) {
@@ -24,7 +22,7 @@ class Tourney(val players: List<Player>, val numGames: Int,
     // ------- internal
 
     internal fun playGame(numCards: Int) {
-        val game = Game(isVerbose)
+        val game = Game()
 
         game.playGame(numCards, players)
 

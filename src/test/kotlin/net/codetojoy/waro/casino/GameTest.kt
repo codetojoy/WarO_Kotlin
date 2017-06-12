@@ -8,7 +8,7 @@ import kotlin.test.assertEquals
 import org.junit.*
 
 class GameTestSource {
-    val game = Game(true)
+    val game = Game()
     val strategy = PopCard()
     val numCards = 12
     val maxCard = numCards

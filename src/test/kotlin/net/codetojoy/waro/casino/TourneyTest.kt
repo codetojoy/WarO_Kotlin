@@ -20,8 +20,7 @@ class TourneyTestSource {
 
     @Test fun testPlayGame() {
         val numGames = 1
-        val isVerbose = true
-        val tourney = Tourney(players, numGames, numCards, isVerbose)
+        val tourney = Tourney(players, numGames, numCards)
 
         // test
         tourney.playGames()

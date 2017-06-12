@@ -8,7 +8,7 @@ import kotlin.test.*
 import org.junit.Test
 
 class ConfigTestSource {
-    val config: Config = Config() 
+    val config = Config
 
     @Test fun testBuildStrategy_MaxCard() {
         // test
@@ -28,22 +28,22 @@ class ConfigTestSource {
         val jsonInput = "{ \"numGames\": 2, \"numCards\": 60, \"players\": [] }"
         
         // test
-        val result = config.buildFromString(jsonInput)
+        config.buildFromString(jsonInput)
         
-        assertEquals(2, result.numGames)
-        assertEquals(60, result.numCards)
+        assertEquals(2, config.numGames)
+        assertEquals(60, config.numCards)
     }    
 
     @Test fun testBuild_OnePlayer() {
         val jsonInput = "{ \"numGames\": 1, \"numCards\": 10, \"players\": [{ \"name\": \"Brahms\", \"strategy\": \"maxCard\"}] }"
         
         // test
-        val result = config.buildFromString(jsonInput)
+        config.buildFromString(jsonInput)
         
-        assertEquals(1, result.numGames)
-        assertEquals(10, result.numCards)
-        assertEquals(1, result.players.size)
-        assertEquals("Brahms", result.players[0].name)
-        assertTrue(result.players[0].strategy is MaxCard)
+        assertEquals(1, config.numGames)
+        assertEquals(10, config.numCards)
+        assertEquals(1, config.players.size)
+        assertEquals("Brahms", config.players[0].name)
+        assertTrue(config.players[0].strategy is MaxCard)
     }    
 }

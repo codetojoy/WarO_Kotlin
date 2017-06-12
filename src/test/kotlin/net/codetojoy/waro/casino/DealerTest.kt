@@ -8,8 +8,7 @@ import kotlin.test.assertEquals
 import org.junit.*
 
 class DealerTestSource {
-    val isVerbose = false
-    val dealer = Dealer(isVerbose)
+    val dealer = Dealer()
     val strategy = PopCard()
     val numCards = 60
     val maxCard = numCards

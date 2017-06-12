@@ -1,8 +1,8 @@
 
 package net.codetojoy.waro
 
-fun String.log(isVerbose:Boolean = true) {
-    if (isVerbose) {
+fun String.log() {
+    if (Config.isVerbose) {
         if (Config.logDelay) {
             val delayInMillis = 300L
             try { Thread.sleep(delayInMillis) } catch (e: Exception) {}
@@ -11,7 +11,7 @@ fun String.log(isVerbose:Boolean = true) {
     }
 }
 
-fun String.logBanner(isVerbose:Boolean = true) {
-    "---------------------".log(isVerbose)
+fun String.logBanner() {
+    "---------------------".log()
 }
 
