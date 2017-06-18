@@ -20,11 +20,11 @@ class GameTestSource {
     val players = mutableListOf(p1, p2, p3)
 
     @Test fun testPlayGame() {
-        val kitty = mutableListOf(4,6,8)
+        val kitty = Hand(listOf(4,6,8))
 
-        p1.hand = mutableListOf(1,11,3)
-        p2.hand = mutableListOf(5,7,12)
-        p3.hand = mutableListOf(10,2,9)
+        p1.hand = Hand(listOf(1,11,3))
+        p2.hand = Hand(listOf(5,7,12))
+        p3.hand = Hand(listOf(10,2,9))
 
         val table = Table(players, kitty)
 

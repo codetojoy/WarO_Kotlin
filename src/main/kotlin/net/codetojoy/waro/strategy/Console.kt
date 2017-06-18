@@ -1,6 +1,8 @@
 
 package net.codetojoy.waro.strategy
 
+import net.codetojoy.waro.domain.Hand
+
 import net.codetojoy.waro.log
 import net.codetojoy.waro.logBanner
 
@@ -8,7 +10,7 @@ import java.util.*
 
 class Console : Strategy {
 
-    override fun selectCard(prizeCard: Int, hand: List<Int>, maxCard: Int): Int {
+    override fun selectCard(prizeCard: Int, hand: Hand, maxCard: Int): Int {
         var bid: Int? = null
 
         "".logBanner()

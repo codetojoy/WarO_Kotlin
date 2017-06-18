@@ -1,11 +1,13 @@
 package net.codetojoy.waro.strategy
 
+import net.codetojoy.waro.domain.Hand
+
 import kotlin.test.assertEquals
 import org.junit.Test
 
 class HybridThirdsTestSource {
     val strategy = HybridThirds(MaxCard(), PopCard(), MinCard()) 
-    val hand = listOf(11, 1, 33, 44, 22)
+    val hand = Hand(listOf(11, 1, 33, 44, 22))
     val maxCard = 60
 
     @Test fun testSelectCard_Low() {

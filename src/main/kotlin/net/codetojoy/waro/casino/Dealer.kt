@@ -18,7 +18,7 @@ class Dealer() {
         val kitty = hands[0]
 
         for (index in 1..numPlayers) {
-            players[index - 1].hand = hands[index].toMutableList()
+            players[index - 1].hand = hands[index]
         }
 
         val table = Table(players, kitty)
@@ -27,7 +27,7 @@ class Dealer() {
     }
 
     fun play(table: Table) =
-        table.kitty.forEach { playRound(it, table.players) }
+        table.kitty.cards.forEach { playRound(it, table.players) }
 
     // ------ internal
 
@@ -63,14 +63,14 @@ class Dealer() {
         return result
     }
 
-    internal fun dealHands(numCards: Int, numPlayers: Int): List<List<Int>> {
-        var result = ArrayList<List<Int>>()
+    internal fun dealHands(numCards: Int, numPlayers: Int): List<Hand> {
+        var result = ArrayList<Hand>()
 
         val deck = newDeck(numCards)
         val numCardsInHand = getNumCardsInHand(numCards, numPlayers)
 
         Lists.partition(deck, numCardsInHand).forEach { hand ->
-            result.add(hand)
+            result.add(Hand(hand))
         }
 
         return result

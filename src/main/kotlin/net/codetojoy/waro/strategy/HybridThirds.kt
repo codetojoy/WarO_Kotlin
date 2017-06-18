@@ -1,6 +1,8 @@
 
 package net.codetojoy.waro.strategy
 
+import net.codetojoy.waro.domain.Hand
+
 class HybridThirds(val high:Strategy, val mid:Strategy, val low:Strategy) : Strategy {
     enum class Range {
         highRange,
@@ -8,7 +10,7 @@ class HybridThirds(val high:Strategy, val mid:Strategy, val low:Strategy) : Stra
         lowRange
     }
 
-    override fun selectCard(prizeCard: Int, hand: List<Int>, maxCard: Int) = 
+    override fun selectCard(prizeCard: Int, hand: Hand, maxCard: Int) = 
         when(getRange(prizeCard, maxCard)) {
             Range.highRange -> high.selectCard(prizeCard, hand, maxCard)
             Range.midRange -> mid.selectCard(prizeCard, hand, maxCard)

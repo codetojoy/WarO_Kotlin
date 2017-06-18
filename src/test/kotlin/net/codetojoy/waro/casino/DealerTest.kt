@@ -20,28 +20,28 @@ class DealerTestSource {
     val players = mutableListOf(p1, p2, p3)
 
     @Test fun testPlay() {
-        val kitty = mutableListOf(35,25,55)
+        val kitty = Hand(listOf(35,25,55))
 
-        p1.hand = mutableListOf(10,11,12)
-        p2.hand = mutableListOf(15,16,17)
-        p3.hand = mutableListOf(58,50,49)
+        p1.hand = Hand(listOf(10,11,12))
+        p2.hand = Hand(listOf(15,16,17))
+        p3.hand = Hand(listOf(58,50,49))
 
         val table = Table(players, kitty)
 
         // test
         dealer.play(table)
 
-        assertEquals(0, table.players[0].hand.size)
-        assertEquals(0, table.players[1].hand.size)
-        assertEquals(0, table.players[2].hand.size)
+        assertEquals(0, table.players[0].numCards())
+        assertEquals(0, table.players[1].numCards())
+        assertEquals(0, table.players[2].numCards())
     }
 
     @Test fun testPlayRound() {
         val prizeCard = 42
 
-        p1.hand = mutableListOf(10,11,12)
-        p2.hand = mutableListOf(15,16,17)
-        p3.hand = mutableListOf(58,50,49)
+        p1.hand = Hand(listOf(10,11,12))
+        p2.hand = Hand(listOf(15,16,17))
+        p3.hand = Hand(listOf(58,50,49))
 
         // test
         val winner = dealer.playRound(prizeCard, players)
@@ -54,9 +54,9 @@ class DealerTestSource {
     @Test fun testFindRoundWinner() {
         val prizeCard = 30
 
-        p1.hand = mutableListOf(10,11)
-        p2.hand = mutableListOf(50,51)
-        p3.hand = mutableListOf(40,41)
+        p1.hand = Hand(listOf(10,11))
+        p2.hand = Hand(listOf(50,51))
+        p3.hand = Hand(listOf(40,41))
 
         // test
         val (winner, winningBid) = dealer.findRoundWinner(prizeCard, players)
@@ -72,9 +72,9 @@ class DealerTestSource {
         // test
         val table = dealer.deal(numCards, players)
 
-        assertEquals(numCardsInHand, table.kitty.size)
+        assertEquals(numCardsInHand, table.kitty.cards.size)
         assertEquals(numPlayers, table.players.size)
-        for (p in players) { assertEquals(numCardsInHand, p.hand.size) }
+        for (p in players) { assertEquals(numCardsInHand, p.numCards()) }
     }
 
     @Test fun testDealHands() {
@@ -86,11 +86,7 @@ class DealerTestSource {
         assertEquals(5, hands.size)
 
         var uniques = HashSet<Int>()
-        for (hand in hands) {
-            for (card in hand) {
-                uniques.add(card)
-            }
-        }
+        hands.forEach { hand -> uniques.addAll(hand.cards) }
         assertEquals(numCards, uniques.size)
     }
 

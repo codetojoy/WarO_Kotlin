@@ -1,7 +1,9 @@
 
 package net.codetojoy.waro.strategy
 
+import net.codetojoy.waro.domain.Hand
+
 class PopCard : Strategy {
     override 
-    fun selectCard(prizeCard: Int, hand: List<Int>, maxCard: Int) = hand.first()
+    fun selectCard(prizeCard: Int, hand: Hand, maxCard: Int) = hand.cards.first()
 }

@@ -5,11 +5,11 @@ import net.codetojoy.waro.strategy.*
 
 class Player(val name: String, val strategy: Strategy, val maxCard: Int) {
     val playerStats: PlayerStats
-    var hand: MutableList<Int>
+    var hand: Hand
 
     init {
         playerStats = PlayerStats()
-        hand = mutableListOf() 
+        hand = Hand(listOf())
     }
 
     companion object {
@@ -18,18 +18,20 @@ class Player(val name: String, val strategy: Strategy, val maxCard: Int) {
         }
     }
 
+    fun numCards() = hand.cards.size
+
     fun getBid(prizeCard: Int): Bid {
         val offer = strategy.selectCard(prizeCard, hand, maxCard)
 
-        val bid = Bid(offer, this)
+        hand.take(offer)
 
-        hand.remove(bid.offer)
+        val bid = Bid(offer, this)
         
         return bid
     }
 
     fun clear() {
-        hand =  mutableListOf()
+        hand.clear()
         playerStats.clear()
     }
 }
