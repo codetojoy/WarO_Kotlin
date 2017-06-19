@@ -45,9 +45,9 @@ class Dealer() {
     }
 
     internal fun findRoundWinner(prizeCard: Int, players: List<Player>): Pair<Player, Bid> {
-        val fakePlayer = Player.fakePlayer()
-        val fakeBid = Bid(-1, fakePlayer)
-        val seed = Pair(fakePlayer, fakeBid)
+        val seedPlayer = players[0]
+        val seedBid = Bid(-1, seedPlayer)
+        val seed = Pair(seedPlayer, seedBid)
 
         val result: Pair<Player,Bid> = players.fold(seed) { leader, player ->
             val (_, highBid: Bid) = leader

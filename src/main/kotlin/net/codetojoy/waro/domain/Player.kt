@@ -12,12 +12,6 @@ class Player(val name: String, val strategy: Strategy, val maxCard: Int) {
         hand = Hand(listOf())
     }
 
-    companion object {
-        fun fakePlayer() : Player {
-            return Player("Fake Freddie", PopCard(), 10)
-        }
-    }
-
     fun numCards() = hand.cards.size
 
     fun getBid(prizeCard: Int): Bid {
