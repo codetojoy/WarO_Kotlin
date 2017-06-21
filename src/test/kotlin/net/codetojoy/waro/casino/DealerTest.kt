@@ -59,7 +59,8 @@ class DealerTestSource {
         p3.hand = Hand(listOf(40,41))
 
         // test
-        val (winner, winningBid) = dealer.findRoundWinner(prizeCard, players)
+        val winningBid = dealer.findRoundWinner(prizeCard, players)
+        val winner = winningBid.player
 
         assertEquals(p2.name, winner.name)
         assertEquals(50, winningBid.offer)

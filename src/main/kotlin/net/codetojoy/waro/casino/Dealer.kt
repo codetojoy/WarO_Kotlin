@@ -32,7 +32,8 @@ class Dealer() {
     // ------ internal
 
     internal fun playRound(prizeCard: Int, players: List<Player>): Player {
-        val (winner, winningBid) = findRoundWinner(prizeCard, players)
+        val winningBid = findRoundWinner(prizeCard, players)
+        val winner = winningBid.player
 
         "".logBanner()
         "Round Summary:".log()
@@ -44,21 +45,9 @@ class Dealer() {
         return winner
     }
 
-    internal fun findRoundWinner(prizeCard: Int, players: List<Player>): Pair<Player, Bid> {
-        val seedPlayer = players[0]
-        val seedBid = Bid(-1, seedPlayer)
-        val seed = Pair(seedPlayer, seedBid)
-
-        val result: Pair<Player,Bid> = players.fold(seed) { leader, player ->
-            val (_, highBid: Bid) = leader
-            val bid = player.getBid(prizeCard)
-
-            if (bid.offer > highBid.offer) {
-                Pair(bid.player, bid)
-            } else {
-                leader
-            }
-        }
+    internal fun findRoundWinner(prizeCard: Int, players: List<Player>): Bid {
+        val bids = players.map { p -> p.getBid(prizeCard) }
+        val result = bids.maxBy { b -> b.offer }!! 
 
         return result
     }
