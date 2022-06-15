@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.org/codetojoy/WarO_Kotlin.svg?branch=master)](https://travis-ci.org/codetojoy/WarO_Kotlin)
 
 WarO_Kotlin
 ===========
