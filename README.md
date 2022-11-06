@@ -6,11 +6,9 @@ The War-O [code kata](https://en.wikipedia.org/wiki/Kata_(programming)) in Kotli
 
 To execute:
 
-* install Gradle from http://gradle.org
+* requires JDK 17+
 * configure game, players in `config.json`
-* execute: 
-    * `gradle installDist`
-    * `./install/bin/WarO_Kotlin config.json`
+* `./run_app.sh`
 
 Rules:
 ---------

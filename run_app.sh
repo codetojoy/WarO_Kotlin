@@ -1,6 +1,6 @@
 #!/bin/bash
 
-gradle clean installDist
+./gradlew clean installDist
 
 ./install/bin/WarO_Kotlin config.json
 
